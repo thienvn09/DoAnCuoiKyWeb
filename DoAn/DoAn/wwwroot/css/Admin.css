@@ -1,0 +1,69 @@
+﻿/* Các màu sắc cho từng box */
+.bg-dollar {
+    background-color: #3c9d4f; /* Màu xanh lá cây giống Dollar Mỹ */
+}
+
+.bg-green-powder {
+    background-color: #b0e0e6; /* Màu xanh Powder */
+}
+
+.bg-blue-a2dce {
+    background-color: #A2DCE0; /* Màu A2DCE (xanh dương nhẹ) */
+}
+
+.bg-light-aDEE2 {
+    background-color: #ADEE2E; /* Màu ADEE2 (xanh da trời nhẹ) */
+}
+
+/* Tô màu nền cho các box */
+.featurs-item-1 {
+    background-color: #004d2e; /* Màu nền tối cho box với icon đô la */
+    color: #fff; /* Màu chữ trắng để nổi bật */
+}
+
+.featurs-item-2 {
+    background-color: #607d8b; /* Màu xám xanh cho box với icon phiếu giao dịch */
+    color: #fff; /* Màu chữ trắng */
+}
+
+.featurs-item-3 {
+    background-color: #1c3d5d; /* Màu xanh dương đậm cho box với icon sản phẩm trái cây */
+    color: #fff; /* Màu chữ trắng */
+}
+
+.featurs-item-4 {
+    background-color: #37474f; /* Màu xám đen cho box với icon tài khoản */
+    color: #fff; /* Màu chữ trắng */
+}
+
+/* Style cho icon */
+.featurs-icon {
+    width: 80px; /* Kích thước vòng tròn */
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    border: 5px solid #fff; /* Đường viền trắng quanh icon */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Hiệu ứng bóng đổ */
+    transition: all 0.3s ease; /* Hiệu ứng khi hover */
+}
+
+    .featurs-icon:hover {
+        background-color: #0056b3; /* Màu khi hover */
+        transform: translateY(-5px); /* Đẩy lên một chút khi hover */
+        box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Tăng hiệu ứng bóng đổ khi hover */
+    }
+
+    .featurs-icon i {
+        color: white; /* Màu trắng cho icon */
+    }
+
+.featurs-content h5 {
+    font-weight: bold; /* Làm đậm tiêu đề */
+    margin-bottom: 10px; /* Khoảng cách dưới tiêu đề */
+}
+
+.featurs-content p {
+    font-size: 1.1rem; /* Kích thước chữ cho nội dung */
+}

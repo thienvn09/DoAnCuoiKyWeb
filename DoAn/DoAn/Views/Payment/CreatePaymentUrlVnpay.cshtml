@@ -1,0 +1,27 @@
+﻿@model IEnumerable<DoAn.Models.Vnpay.PaymentInformationModel>
+
+@{
+    ViewData["Title"] = "Thanh toán VnPay";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form method="post" action="@Url.Action("CreatePaymentUrlVnpay", "Payment")">
+    <div class="form-group">
+        <label for="Name">Tên khách hàng</label>
+        <input type="text" class="form-control" id="Name" name="Name" required />
+    </div>
+    <div class="form-group">
+        <label for="OrderDescription">Mô tả đơn hàng</label>
+        <input type="text" class="form-control" id="OrderDescription" name="OrderDescription" required />
+    </div>
+    <div class="form-group">
+        <label for="Amount">Số tiền (VND)</label>
+        <input type="number" class="form-control" id="Amount" name="Amount" required />
+    </div>
+    <div class="form-group">
+        <label for="OrderType">Loại đơn hàng</label>
+        <input type="text" class="form-control" id="OrderType" name="OrderType" required />
+    </div>
+    <button type="submit" class="btn btn-primary">Thanh toán</button>
+</form>

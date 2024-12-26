@@ -1,0 +1,224 @@
+﻿@model DoAn.Models.ProductPagination
+@{
+    ViewData["Title"] = "Index";
+}
+<!-- Single Page Header start -->
+<div class="container-fluid page-header py-5">
+    <h1 class="text-center text-white display-6">Shop</h1>
+    <ol class="breadcrumb justify-content-center mb-0">
+        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item"><a href="#">Pages</a></li>
+        <li class="breadcrumb-item active text-white">Shop</li>
+    </ol>
+</div>
+<!-- Single Page Header End -->
+<!-- Modal Start -->
+<div class="modal fade" id="modalAddToCartSuccess" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Thông báo</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Thêm vào giỏ hàng thành công
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal End -->
+<!-- Fruits Shop Start -->
+<div class="container-fluid fruite py-5">
+    <div class="container py-5">
+        <h1 class="mb-4">Fresh fruits shop</h1>
+        <div class="row g-4">
+            <div class="col-lg-12">
+                <div class="row g-4">
+                    <div class="col-xl-3">
+                        <form asp-controller="Product" asp-action="Index" asp-route-idCategory="@ViewData["IdCategory"]">
+                            <div class="bg-light ps-3 py-3 rounded d-flex justify-content-between mb-4">
+                                <label for="fruits">Sắp xếp theo:</label>
+                                <select id="dropdown_shop_id"
+                                        name="fruitlist"
+                                        class="border-0 form-select-sm bg-light me-3"
+                                        form="fruitform"
+                                        onchange="changeDropDown()">
+                                    <option value="">
+                                        Tất cả
+                                    </option>
+                                    <option value="price_desc">
+                                        Giá cao đến thấp
+                                    </option>
+                                    <option value="price">
+                                        Giá thấp đến cao
+                                    </option>
+                                    <option value="rate_desc">
+                                        Đánh giá
+                                    </option>
+                                </select>
+
+                                <!-- Hidden Start-->
+                                <input type="hidden" id="sort_value_id" name="sortOrder" />
+                                <input type="hidden" id="sort_column_id" value="@ViewData["SortColumn"]" />
+                                <input type="hidden" name="idCategory" value="@ViewData["IdCategory"]" />
+                                <!-- Hidden End-->
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Left Panel Start -->
+                <div class="row g-4">
+                    <div class="col-lg-3">
+                        <div class="row g-4">
+                            <!-- Categories Start -->
+                            <div class="col-lg-12">
+                                @await Component.InvokeAsync("MenuCategory")
+                            </div>
+                            <!-- Categories End -->
+                            <!-- Featured Products Start -->
+                            <div class="col-lg-12">
+                                @await Component.InvokeAsync("FeaturedProducts", new { limit = 5 })
+                            </div>
+                            <!-- Featured Products End -->
+                        </div>
+                    </div>
+                    <!-- Left Panel End -->
+                    <!-- Right Panel Start -->
+                    <div class="col-lg-9">
+                        <div class="row g-4 justify-content-center">
+                            @foreach (var item in Model.Products)
+                            {
+                                <!-- Item 1 Start -->
+                                <div class="col-md-6 col-lg-6 col-xl-4">
+                                    <div class="rounded shadow-lg position-relative fruiteitem overflow-hidden">
+                                        <div class="fruite-img">
+                                            <a asp-area="" asp-controller="Product" asp-action="Detail" asp-route-id="@item.Id">
+                                                <img src="~/Images/SanPham/@item.Img"
+                                                     class="img-fluid w-100 rounded-top"
+                                                     style="aspect-ratio:1.5; object-fit:cover"
+                                                     alt="@item.Img" />
+                                            </a>
+                                        </div>
+                                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
+                                             style="top: 10px; left: 10px">
+                                            @item.CategoryTitle
+                                        </div>
+                                        <div class="p-4 border border-secondary border-top-0 rounded-bottom d-flex flex-column justify-content-between h-100">
+                                            <h4 class="mb-2 text-primary">@item.Title</h4>
+                                            <p class="mb-3" style="line-height:1.5rem; height:4.5rem; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">
+                                                @item.Content
+                                            </p>
+
+                                            <!-- Giá sản phẩm -->
+                                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                                <span class="fw-bold text-danger fs-5">@item.Price.ToString("#,##0 VND")</span> <!-- Hiển thị giá -->
+                                            </div>
+
+                                            <div class="d-flex justify-content-end">
+                                                <button onclick="clickAddToCart(@item.Id)"
+                                                        class="btn btn-outline-primary rounded-pill px-3 py-2">
+                                                    <i class="fa fa-shopping-bag me-2"></i> Add to cart
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Item 1 End -->
+                            }
+
+                            <!-- Pagination Start -->
+                            <div class="col-12">
+                                <div class="pagination d-flex justify-content-center mt-5">
+                                    @if (Model.CurrentPageIndex > 1)
+                                    {
+                                        <a asp-controller="Product" asp-action="Index"
+                                           asp-route-sortOrder="@ViewData["SortColumn"]"
+                                           asp-route-idCategory="@ViewData["IdCategory"]"
+                                           asp-route-page="@(Model.CurrentPageIndex - 1)"
+                                           class="rounded">&laquo;</a>
+                                    }
+
+                                    @for (int i = 1; i <= Model.PageCount; i++)
+                                    {
+                                        if (i == Model.CurrentPageIndex)
+                                        {
+                                            <a href="#" class="active rounded">@i</a>
+                                        }
+                                        else
+                                        {
+                                            <a asp-controller="Product" asp-action="Index"
+                                               asp-route-sortOrder="@ViewData["SortColumn"]"
+                                               asp-route-idCategory="@ViewData["IdCategory"]"
+                                               asp-route-page="@i" class="rounded">@i</a>
+                                        }
+                                    }
+                                    @if (Model.CurrentPageIndex != Model.PageCount)
+                                    {
+                                        <a asp-controller="Product" asp-action="Index"
+                                           asp-route-sortOrder="@ViewData["SortColumn"]"
+                                           asp-route-idCategory="@ViewData["IdCategory"]"
+                                           asp-route-page="@(Model.CurrentPageIndex + 1)" class="rounded">&raquo;</a>
+                                    }
+
+
+                                </div>
+                            </div>
+                            <!-- Pagination End -->
+                        </div>
+                    </div>
+                    <!-- Right Panel End -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Fruits Shop End -->
+<!-- SCRIPT Start -->
+<script>
+    //----------------- Bắt sự kiện thay đổi giá trị ở ô dropDown ----------
+    function changeDropDown() {
+        valueDropdown = document.getElementById("dropdown_shop_id").value;
+        document.getElementById("sort_value_id").value = valueDropdown;
+        document.forms[0].submit();
+    }
+
+    // -------- set giá trị đã chọn cho Dropdown -------------------------
+    function selectElement(id, valueToSelect) {
+        let element = document.getElementById(id);
+        element.value = valueToSelect;
+    }
+    const sortColumnValue = document.getElementById("sort_column_id").value
+    selectElement('dropdown_shop_id', sortColumnValue);
+            // --------------- AJAX thêm vào giỏ hàng -------------------
+    function clickAddToCart(idProduct) {
+        console.log(idProduct); // Kiểm tra idProduct
+        $.ajax({
+            url: '@Url.Action("AddToCart", "Cart")',
+            data: { id: idProduct },
+            success: function (data) {
+                console.log("Sản phẩm đã được thêm vào giỏ hàng");
+                $.ajax({
+                    url: '@Url.Action("RefreshCartViewComponent", "Cart")',
+                    success: function (data) {
+                        $("#cart_view_component").html(data);
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        console.log(thrownError);
+                        alert("Error updating Cart ViewComponent.");
+                    }
+                });
+                $("#modalAddToCartSuccess").modal('show');
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                console.log(thrownError);
+                alert("Lỗi khi thêm vào giỏ hàng.");
+            }
+        });
+    }
+
+
+</script>
+<!-- SCRIPT End -->

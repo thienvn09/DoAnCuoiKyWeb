@@ -1,0 +1,130 @@
+﻿@model DoAn.Models.Customer
+@{
+    ViewData["Title"] = "Profile";
+}
+<!-- Single Page Header start -->
+<div class="container-fluid page-header py-5">
+    <h1 class="text-center text-white display-6">Tài Khoản</h1>
+    <ol class="breadcrumb justify-content-center mb-0">
+        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item"><a href="#">Pages</a></li>
+        <li class="breadcrumb-item active text-white">Profile</li>
+    </ol>
+</div>
+<!-- Single Page Header End -->
+<!-- Profile Page Start -->
+<div class="container-fluid py-5">
+    <div class="container">
+        <!-- Alert Success Start -->
+        @if (!string.IsNullOrWhiteSpace(TempData["ProfileSuccessMessage"]?.ToString()))
+        {
+            <div class="w-100 d-flex justify-content-end">
+                <div class="alert alert-success alert-dismissible fade show w-50 r0" role="alert" id="alert_error">
+                    <strong>Success!</strong>
+                    @TempData["ProfileSuccessMessage"]?.ToString()
+                    <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+        }
+        <!-- Alert Success End -->
+        <!-- Alert Error Start -->
+        @if (!string.IsNullOrWhiteSpace(TempData["ProfileErrorMessage"]?.ToString()))
+        {
+            <div class="w-100 d-flex justify-content-end">
+                <div class="alert alert-danger alert-dismissible fade show w-50 r-0" role="alert" id="alert_error">
+                    <strong>Error!</strong>
+                    @TempData["ProfileErrorMessage"]?.ToString()
+                    <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+        }
+        <!-- Alert Error End -->
+
+        <h1 class="mb-4">Trang cá nhân</h1>
+        <form method="post" asp-action="UpdateDetailCustomer" asp-controller="Customer" enctype="multipart/form-data">
+            <div class="row g-5">
+                <div class="col-md-12 col-lg-6 col-xl-5">
+                    <!-- Avatar -->
+                    <div class="w-50 justify-content-md-center" style="position: relative; left: 50%; transform: translate(-50%)">
+                        <img src="~/images/KhachHang/@Model.Img" class="img-fluid w-100" id="image_preview"
+                             style="aspect-ratio: 1; object-fit: cover; border-radius: 100%; box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.25);" />
+                        <div style="position: absolute; bottom: 20px; right: 0px; background-color: white; padding: 10px 15px; border-radius: 100%; box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.25);">
+                            <input type="file" name="ImgUpload" id="image_upload" accept="image/*"
+                                   style="position: absolute; width: 100%; top: 0; left: 0; height: 100%; opacity: 0;" />
+                            <input type="text" asp-for="Img" style="display:none" />
+                            <i class="bi bi-camera" style="color: grey"></i>
+                        </div>
+                    </div>
+                    <!-- Menu Profile -->
+                    <div class="d-flex mt-5 justify-content-center">
+                        <a href="#" class="btn btn-outline-primary" style="margin-right: 20px">
+                            <label style="font-size: 16px">Đổi mật khẩu</label>
+                        </a>
+                        <a asp-controller="Customer" asp-action="SignOut" class="btn btn-danger"><label>Đăng xuất</label></a>
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-6 col-xl-7">
+                    <div class="row">
+                        <input type="text" asp-for="Id" style="display:none" />
+                        <div class="col-md-12 col-lg-6">
+                            <div class="form-item w-100">
+                                <label class="form-label my-3">Họ <span asp-validation-for="LastName" class="text-danger"></span></label>
+                                <input asp-for="LastName" type="text" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-lg-6">
+                            <div class="form-item w-100">
+                                <label class="form-label my-3">Tên <span asp-validation-for="FirstName" class="text-danger"></span></label>
+                                <input asp-for="FirstName" type="text" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-item">
+                        <label class="form-label my-3">Số điện thoại <span asp-validation-for="Phone" class="text-danger"></span></label>
+                        <input asp-for="Phone" type="text" class="form-control" />
+                    </div>
+                    <div class="form-item">
+                        <label class="form-label my-3">Email <span asp-validation-for="Email" class="text-danger"></span></label>
+                        <input asp-for="Email" type="email" class="form-control" placeholder="" />
+                    </div>
+                    <div class="form-item">
+                        <label class="form-label my-3">Ngày sinh</label>
+                        <input asp-for="DateOfBirth" type="date" value="@Model.DateOfBirth?.ToString("yyyy-MM-dd")" class="form-control w-50" />
+                    </div>
+                    <div class="form-item">
+                        <label class="form-label my-3">Địa chỉ</label>
+                        <input asp-for="Address" type="text" class="form-control" placeholder="" />
+                    </div>
+                    <div class="form-item my-3">
+                        <button class="btn btn-primary" type="submit">
+                            <label class="mx-3" style="color: white">Lưu</label>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- Profile Page End -->
+<!-- Display Image Upload Start -->
+<script>
+    // --------- Image Upload ---------------
+    const imageUpload = document.getElementById("image_upload");
+    const imagePreview = document.getElementById("image_preview");
+    imageUpload.addEventListener("change", (event) => {
+        const files = event.target.files;
+        const [file] = event.target.files;
+        console.log("files", file);
+        imagePreview.src = URL.createObjectURL(event.target.files[0]);
+        imagePreview.onload = function () {
+            URL.revokeObjectURL(output.src); // free memory
+        };
+    });
+
+    // ------------- Auto Close Alert ----------------
+    window.setTimeout(function () {
+        $(".alert").fadeTo(500, 0).slideUp(500, function () {
+            $(this).remove();
+        });
+    }, 2000);
+</script>

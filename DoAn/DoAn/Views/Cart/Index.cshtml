@@ -1,0 +1,196 @@
+﻿@model IEnumerable<DoAn.Models.CartItem>
+
+<!-- Single Page Header start -->
+<div class="container-fluid page-header py-5">
+    <h1 class="text-center text-white display-6">Giỏ Hàng</h1>
+    <ol class="breadcrumb justify-content-center mb-0">
+        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item"><a href="#">Pages</a></li>
+        <li class="breadcrumb-item active text-white">Cart</li>
+    </ol>
+</div>
+<!-- Single Page Header End -->
+<!-- Cart Page Start -->
+<div class="container-fluid py-5">
+    <div class="container py-5">
+        <!-- Alert Success Start -->
+        @if (!string.IsNullOrWhiteSpace(TempData["CheckOutSuccessMessage"]?.ToString()))
+        {
+            <div class="w-100 d-flex justify-content-end">
+                <div class="alert alert-success alert-dismissible fade show r-0 mr-5" role="alert" id="alert_message" style="width:40%">
+                    <strong>Success!</strong>
+                    @TempData["CheckOutSuccessMessage"]
+                    <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+        }
+        <!-- Alert Success End -->
+        <!-- Alert Error Start -->
+        @if (!string.IsNullOrWhiteSpace(TempData["CheckOutErrorMessage"]?.ToString()))
+        {
+            <div class="w-100 d-flex justify-content-end">
+                <div class="alert alert-danger alert-dismissible fade show r-0 mr-5" role="alert" id="alert_message" style="width:40%">
+                    <strong>Error!</strong>
+                    @TempData["CheckOutErrorMessage"]
+                    <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+        }
+        <!-- Alert Error End -->
+        <!-- Payment Status Alert Start -->
+        @if (!string.IsNullOrWhiteSpace(TempData["PaymentStatus"]?.ToString()))
+        {
+            var isSuccess = TempData["PaymentStatus"].ToString().ToLower() == "success";
+            <div class="w-100 d-flex justify-content-end">
+                <div class="alert @(isSuccess ? "alert-success" : "alert-danger") alert-dismissible fade show r-0 mr-5" role="alert" id="alert_payment_status" style="width:40%">
+                    <strong>@(isSuccess ? "Success!" : "Error!")</strong>
+                    @TempData["PaymentMessage"]
+                    <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+        }
+        <!-- Payment Status Alert End -->
+
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Products</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Total</th>
+                        <th scope="col">Handle</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr id="idProduct-@item.IdProduct">
+                            <th scope="row">
+                                <div class="d-flex align-items-center">
+                                    <img src="~/Images/SanPham/@item.Img" class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;" alt="@item.Img">
+                                </div>
+                            </th>
+                            <td>
+                                <p class="mb-0 mt-4">@item.Name</p>
+                            </td>
+                            <td>
+                                <p class="mb-0 mt-4">@item.Price.ToString("#,##0 VND")</p>
+                            </td>
+                            <td>
+                                <div class="input-group quantity mt-4" style="width: 100px;">
+                                    <div class="input-group-btn">
+                                        <button product-id="@item.IdProduct" onclick="clickBtnQuantity(@item.IdProduct,false)" class="btn btn-sm btn-minus rounded-circle bg-light border">
+                                            <i class="fa fa-minus"></i>
+                                        </button>
+                                    </div>
+                                    <input type="number" class="form-control form-control-sm text-center border-0" value="@item.Quantity" readonly>
+                                    <div class="input-group-btn">
+                                        <button product-id="@item.IdProduct" onclick="clickBtnQuantity(@item.IdProduct,true)" class="btn btn-sm btn-plus rounded-circle bg-light border">
+                                            <i class="fa fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <p id="totalProduct-@item.IdProduct" class="mb-0 mt-4 total-price">@item.Total.ToString("#,##0 VND")</p>
+                            </td>
+                            <td>
+                                <a asp-controller="cart" asp-action="RemoveCart" asp-route-id="@item.IdProduct" class="btn btn-md rounded-circle bg-light border mt-4" onclick="return confirm('Are you sure you want to remove this item?');">
+                                    <i class="fa fa-times text-danger"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="container py-5">
+            <h3 class="mb-4">Chọn phương thức thanh toán</h3>
+            <form asp-controller="Cart" asp-action="CheckOut" method="post" class="row g-4">
+                <!-- Thông tin đơn hàng -->
+                <div class="col-12">
+                    <div class="form-group">
+                        <label for="orderName">Tên người nhận</label>
+                        <input type="text" id="orderName" name="OrderName" class="form-control" placeholder="Nhập tên người nhận" required />
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="form-group">
+                        <label for="orderDescription">Ghi chú</label>
+                        <textarea id="orderDescription" name="OrderDescription" class="form-control" rows="3" placeholder="Nhập ghi chú (nếu có)"></textarea>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="form-group">
+                        <label for="amount">Tổng số tiền</label>
+                        <input type="text" id="amount" name="Amount" value="@Model.Sum(p => p.Total).ToString("#,##0 VND")" class="form-control" readonly />
+                    </div>
+                </div>
+
+                <!-- Chọn phương thức thanh toán -->
+                <div class="col-12">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="PaymentMethod" id="momoPayment" value="momo" required />
+                        <label class="form-check-label" for="momoPayment">
+                            Thanh toán qua MoMo
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="PaymentMethod" id="vnpayPayment" value="vnpay" required />
+                        <label class="form-check-label" for="vnpayPayment">
+                            Thanh toán qua VNPay
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="PaymentMethod" id="codPayment" value="cod" required />
+                        <label class="form-check-label" for="codPayment">
+                            Thanh toán khi nhận hàng (COD)
+                        </label>
+                    </div>
+                </div>
+                <!-- Nút thanh toán -->
+                <div class="col-12 text-end">
+                    <button type="submit" class="btn btn-primary px-5">Thanh Toán</button>
+                </div>
+            </form>
+        </div>
+
+<!-- Cart Page End -->
+
+<script>
+    // Update the Cart when quantities change
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.btn-minus, .btn-plus').forEach(function (button) {
+            button.addEventListener('click', function (event) {
+                event.preventDefault();
+                var productId = this.getAttribute('product-id');
+                var isIncrement = this.classList.contains('btn-plus');
+
+                fetch(`/cart/ChangeQuantityCart?id=${productId}&isIncrement=${isIncrement}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            document.getElementById(`idProduct-${productId}`).querySelector('input').value = data.newQuantity;
+                            document.getElementById(`idProduct-${productId}`).querySelector('.total-price').innerText = data.newTotal;
+                            document.querySelector('.cart-total').innerText = data.cartTotal;
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
+            });
+        });
+    });
+
+    // Automatically close alert after 2 seconds
+    setTimeout(function () {
+        $(".alert").fadeOut(500, function () {
+            $(this).remove();
+        });
+    }, 2000);
+</script>

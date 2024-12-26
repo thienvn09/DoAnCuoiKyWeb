@@ -1,0 +1,46 @@
+﻿@model DoAn.Areas.Admin.Models.PaymentAdmin
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Chi tiết thanh toán</h1>
+
+<!-- Hiển thị thông tin thanh toán -->
+<p>Thanh toán ID: @Model.Id</p>
+<p>Khách hàng: @Model.FirstName @Model.LastName</p>
+<p>Số điện thoại: @Model.Phone</p>
+<p>Email: @Model.Email</p>
+<p>Tổng thanh toán: @Model.Total.Value.ToString("#,0") VND</p>
+<p>Ngày thanh toán Lần Cuối : @Model.CreateAt</p>
+
+<h3>Chi tiết sản phẩm trong thanh toán</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Product ID</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var detail in Model.PaymentDetails)
+        {
+            <tr>
+                <td>@detail.ProductId</td>
+                <td>@detail.Price</td>
+                <td>@detail.Quantity</td>
+                <td>@detail.Total.Value.ToString("#,0") VND</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- Hiển thị tổng tiền -->
+<p><strong>Tổng tiền khách đã thanh toán: @ViewBag.TotalAmount.ToString("#,0") VND</strong></p>
+
+<div>
+    
+    <a asp-action="Index">Trờ về trang quản lý hóa đơn</a>
+</div>

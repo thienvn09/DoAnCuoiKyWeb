@@ -1,0 +1,74 @@
+﻿@model DoAn.Areas.Admin.Models.PaymentAdmin
+
+@{
+    ViewData["Title"] = "Create Payment";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="container">
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["ErrorMessage"]
+        </div>
+    }
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["SuccessMessage"]
+        </div>
+    }
+
+    <form asp-action="Create" method="post">
+        <div class="form-group">
+            <label asp-for="CustomerId">Mã khách hàng</label>
+            <input asp-for="CustomerId" class="form-control" type="number" />
+            <span asp-validation-for="CustomerId" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="FirstName">Tên khách hàng</label>
+            <input asp-for="FirstName" class="form-control" />
+            <span asp-validation-for="FirstName" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="LastName">Họ khách hàng</label>
+            <input asp-for="LastName" class="form-control" />
+            <span asp-validation-for="LastName" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Phone">Số điện thoại</label>
+            <input asp-for="Phone" class="form-control" />
+            <span asp-validation-for="Phone" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Email">Email</label>
+            <input asp-for="Email" class="form-control" type="email" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Total">Tổng tiền</label>
+            <input asp-for="Total" class="form-control" type="number" step="0.01" />
+            <span asp-validation-for="Total" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="CreateAt">Ngày tạo</label>
+            <input asp-for="CreateAt" class="form-control" type="datetime-local" />
+            <span asp-validation-for="CreateAt" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Thêm mới</button>
+        <a asp-action="Index" class="btn btn-secondary">Hủy</a>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

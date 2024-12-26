@@ -1,0 +1,87 @@
+﻿@model DoAn.Areas.Admin.Models.ProductFormAdmin
+
+<h1 class="text-center">Edit Product</h1>
+<h4 class="text-center">Product Form</h4>
+<hr />
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Id" class="form-label"></label>
+                <input asp-for="Id" disabled class="form-control" />
+                <span asp-validation-for="Id" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Title" class="form-label">Product Title</label>
+                <input asp-for="Title" class="form-control" placeholder="Enter product title" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Content" class="form-label">Content</label>
+                <input asp-for="Content" class="form-control" placeholder="Enter product content" />
+                <span asp-validation-for="Content" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label class="form-label">Image</label>
+                <div class="mb-2">
+                    @* Lấy dữ liệu Img khi người dùng không upload ảnh mới *@
+                    <img src="~/Images/SanPham/@Model.Img"
+                         class="img-fluid rounded"
+                         alt="Image"
+                         width="300" height="300" />
+                </div>
+
+                <input class="form-control"
+                       type="file"
+                       accept="image/gif, image/jpeg, image/png"
+                       name="ImageUpload" />
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Price" class="form-label">Price</label>
+                <input asp-for="Price" type="number" class="form-control" placeholder="Enter price" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Rate" class="form-label">Rate</label>
+                <input asp-for="Rate" type="number" class="form-control" placeholder="Enter rate" />
+                <span asp-validation-for="Rate" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label class="form-label">Category</label>
+                <select class="form-select"
+                        asp-items="@Model.ListCategory"
+                        asp-for="IdCategorySelected">
+                </select>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="CreateAt" class="form-label">Created At</label>
+                <input asp-for="CreateAt" disabled class="form-control" />
+                <span asp-validation-for="CreateAt" class="text-danger"></span>
+            </div>
+
+            <div class="text-center mt-4">
+                <input type="submit" value="Save" class="btn btn-success btn-lg" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="text-center mt-4">
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

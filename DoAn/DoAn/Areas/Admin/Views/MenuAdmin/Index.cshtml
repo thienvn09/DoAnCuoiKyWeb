@@ -1,0 +1,46 @@
+﻿@model IEnumerable<DoAn.Areas.Admin.Models.MenuAdmin>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<br />
+<div class="card-body">
+    <h1>Menu Management</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Id)</th>
+                <th>@Html.DisplayNameFor(model => model.Title)</th>
+                <th>@Html.DisplayNameFor(model => model.MenuUrl)</th>
+                <th>@Html.DisplayNameFor(model => model.ParentId)</th>
+                <th>@Html.DisplayNameFor(model => model.MenuIndex)</th>
+                <th>Visible</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Title)</td>
+                    <td>@Html.DisplayFor(modelItem => item.MenuUrl)</td>
+                    <td>@Html.DisplayFor(modelItem => item.ParentId)</td>
+                    <td>@Html.DisplayFor(modelItem => item.MenuIndex)</td>
+                    <td>
+                        <input type="checkbox"
+                               class="menu-checkbox"
+                               data-id="@item.Id"
+                        @(item.isVisible ? "checked" : "") />
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

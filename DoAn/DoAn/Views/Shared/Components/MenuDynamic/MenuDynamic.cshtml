@@ -1,0 +1,112 @@
+﻿@model IEnumerable<DoAn.Models.NavBarItem>
+<!-- Navbar start -->
+<div class="container-fluid fixed-top">
+    <div class="container topbar bg-primary d-none d-lg-block">
+        <div class="d-flex justify-content-between">
+            <div class="top-info ps-3">
+                <small class="me-3">
+                    <i class="fas fa-phone-alt me-2"></i>
+                    <a class="text-white">Tư vấn và hỗ trợ</a>
+                </small>
+                <small class="me-3">
+                    <i class="fas fa-phone me-2"></i>
+                    <a href="tel:64132269" class="text-white">64132269</a>
+                </small>
+                <small class="me-3">
+                    <i class="fas fa-envelope me-2 text-secondary"></i>
+                    <a href="mailto:Thien.lh.cntt64@ntu.com" class="text-white">Thien.lh.cntt64@ntu.com</a>
+                </small>
+            </div>
+            <div class="top-link pe-2">
+                @if (@Context.User.Identity.IsAuthenticated)
+                {
+                    <label style="font-weight:400; font-size:12px; color:white;margin-top:2px">
+                        Xin chào
+                    </label>
+                    <a asp-area="" asp-controller="Customer" asp-action="Profile" class="text-white">
+                        <small class="text-white mx-2" style="font-weight:bold">
+                            @Context.User.Identity.Name
+                        </small> /
+                    </a>
+                    <a asp-area="" asp-controller="Customer" asp-action="SignOut" class="text-white font-weight-bold">
+                        <small class="text-white mx-2" style="font-weight:bold">Đăng xuất</small>
+                    </a>
+                }
+                else
+                {
+                    <a asp-area="" asp-controller="Customer" asp-action="SignIn" class="text-white">
+                        <small class="text-white mx-2">Đăng nhập</small> /
+                    </a>
+                    <a asp-area="" asp-controller="Customer" asp-action="SignUp" class="text-white">
+                        <small class="text-white mx-2">Đăng ký</small>
+                    </a>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="container px-0">
+        <nav class="navbar navbar-light bg-white navbar-expand-xl">
+            <a asp-controller="Home" asp-action="index" class="navbar-brand">
+                <h1 class="text-primary display-6">Foody</h1>
+            </a>
+            <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="fa fa-bars text-primary"></span>
+            </button>
+            <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
+                <div class="navbar-nav mx-auto">
+                    @foreach (var item in Model)
+                    {
+                        if (item.subItems?.Count() == 0)
+                        {
+                            <a href="@item.MenuUrl"
+                               class="nav-item nav-link @(item!.MenuUrl == Context.Request.Path ? "active" : "")">
+                                @item.Title
+                            </a>
+                        }
+                        else
+                        {
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                                    @item.Title
+                                </a>
+                                <div class="dropdown-menu m-0 bg-secondary rounded-0">
+                                    @foreach (var subItem in item!.subItems!)
+                                    {
+                                        <a href="@subItem.MenuUrl" class="dropdown-item">
+                                            @subItem.Title
+                                        </a>
+                                    }
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+
+                <a href="contact.html" class="nav-item nav-link">
+                    <i class="fas fa-envelope me-2"></i> Contact
+                </a>
+                <a asp-area="Admin" asp-controller="Home" asp-action="index" class="nav-item nav-link">
+                    <i class="fas fa-cogs me-2"></i> Admin
+                </a>
+            </div>
+
+            <div class="d-flex m-3 me-0">
+                <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4"
+                        data-bs-toggle="modal" data-bs-target="#searchModal">
+                    <i class="fas fa-search text-primary"></i>
+                </button>
+                <div id="cart_view_component">
+                    @await Component.InvokeAsync("Cart")
+                </div>
+
+                <a href="#" class="my-auto">
+                    <a asp-area="" asp-controller="Customer" asp-action="Profile" class="my-auto">
+                        <i class="fas fa-user fa-2x"></i>
+                    </a>
+                </a>
+            </div>
+        </nav>
+    </div>
+</div>
+<!-- Navbar End -->

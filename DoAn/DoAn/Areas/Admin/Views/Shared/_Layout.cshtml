@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - DoAn</title>
+    <!-- Thêm Font Awesome vào phần head của trang -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    
+    <!-- Liên kết các file CSS -->
+    <link rel="stylesheet" href="~/css/Responsive.css" />
+    <link rel="stylesheet" href="~/css/Mystyle.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/DoAn.styles.css" asp-append-version="true" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+</head>
+
+<body>
+    <header>
+        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+            <i class="fas fa-shopping-bag" style="color: #28a745;"></i> Back to Shop
+        </a>
+        <div class="navbar-collapse collapse d-sm-inline-flex">
+            <a class="nav-link @(ViewData["Title"]?.ToString() == "DashBoard" ? "text-dark active-link" : "text-dark")"
+               asp-area="Admin" asp-controller="Home" asp-action="Index">
+                <i class="fas fa-tachometer-alt" style="color: #007bff;"></i> DashBoard
+            </a>
+            <a class="nav-link @(ViewData["Title"]?.ToString() == "Quản Lý Danh Mục Sản Phẩm" ? "text-dark active-link" : "text-dark")"
+               asp-area="Admin" asp-controller="CategoryAdmin" asp-action="Index">
+                <i class="fas fa-list" style="color: #ffc107;"></i> Quản Lý Danh Mục Sản Phẩm
+            </a>
+            <a class="nav-link @(ViewData["Title"]?.ToString() == "Quản Lý Sản Phẩm" ? "text-dark active-link" : "text-dark")"
+               asp-area="Admin" asp-controller="ProductAdmin" asp-action="Index">
+                <i class="fas fa-box" style="color: #17a2b8;"></i> Quản Lý Sản Phẩm
+            </a>
+            <a class="nav-link @(ViewData["Title"]?.ToString() == "Quản Lý Khách Hàng" ? "text-dark active-link" : "text-dark")"
+               asp-area="Admin" asp-controller="CustomerAdmin" asp-action="Index">
+                <i class="fas fa-users" style="color: #6f42c1;"></i> Quản Lý Khách Hàng
+            </a>
+            <a class="nav-link @(ViewData["Title"]?.ToString() == "Quản lý Hóa Đơn" ? "text-dark active-link" : "text-dark")"
+               asp-area="Admin" asp-controller="PaymentAdmin" asp-action="Index">
+                <i class="fas fa-receipt" style="color: #e83e8c;"></i> Quản lý Hóa Đơn
+            </a>
+            <div class="message" style="margin-left: auto; display: flex; align-items: center;">
+                <a>
+                    <i class="fas fa-user-circle" style="color: #fd7e14;"></i> Xin chào admin
+                </a>
+                <div class="dp">
+                    <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210180014/profile-removebg-preview.png"
+                         class="dpicn"
+                         alt="dp">
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+    <br />
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2024 - DoAn - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

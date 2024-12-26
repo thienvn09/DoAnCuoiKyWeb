@@ -1,0 +1,179 @@
+is_global = true
+build_property.TargetFramework = net8.0
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = DoAn
+build_property.RootNamespace = DoAn
+build_property.ProjectDir = C:\Users\THIEN\Desktop\BaiCuoiKyweb\DoAn\DoAn\DoAn\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\THIEN\Desktop\BaiCuoiKyweb\DoAn\DoAn\DoAn
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/THIEN/Desktop/BaiCuoiKyweb/DoAn/DoAn/DoAn/Areas/Admin/Views/CategoryAdmin/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ2F0ZWdvcnlBZG1pblxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/THIEN/Desktop/BaiCuoiKyweb/DoAn/DoAn/DoAn/Areas/Admin/Views/CategoryAdmin/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ2F0ZWdvcnlBZG1pblxEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/THIEN/Desktop/BaiCuoiKyweb/DoAn/DoAn/DoAn/Areas/Admin/Views/CategoryAdmin/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ2F0ZWdvcnlBZG1pblxEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/THIEN/Desktop/BaiCuoiKyweb/DoAn/DoAn/DoAn/Areas/Admin/Views/CategoryAdmin/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ2F0ZWdvcnlBZG1pblxFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/THIEN/Desktop/BaiCuoiKyweb/DoAn/DoAn/DoAn/Areas/Admin/Views/CategoryAdmin/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ2F0ZWdvcnlBZG1pblxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/THIEN/Desktop/BaiCuoiKyweb/DoAn/DoAn/DoAn/Areas/Admin/Views/ProductAdmin/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcUHJvZHVjdEFkbWluXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/THIEN/Desktop/BaiCuoiKyweb/DoAn/DoAn/DoAn/Areas/Admin/Views/ProductAdmin/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcUHJvZHVjdEFkbWluXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/THIEN/Desktop/BaiCuoiKyweb/DoAn/DoAn/DoAn/Areas/Admin/Views/ProductAdmin/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcUHJvZHVjdEFkbWluXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/THIEN/Desktop/BaiCuoiKyweb/DoAn/DoAn/DoAn/Areas/Admin/Views/ProductAdmin/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcUHJvZHVjdEFkbWluXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/THIEN/Desktop/BaiCuoiKyweb/DoAn/DoAn/DoAn/Areas/Admin/Views/ProductAdmin/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcUHJvZHVjdEFkbWluXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/THIEN/Desktop/BaiCuoiKyweb/DoAn/DoAn/DoAn/Areas/Admin/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/THIEN/Desktop/BaiCuoiKyweb/DoAn/DoAn/DoAn/Areas/Admin/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/THIEN/Desktop/BaiCuoiKyweb/DoAn/DoAn/DoAn/Areas/Admin/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/THIEN/Desktop/BaiCuoiKyweb/DoAn/DoAn/DoAn/Areas/Admin/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/THIEN/Desktop/BaiCuoiKyweb/DoAn/DoAn/DoAn/Views/Cart/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FydFxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/THIEN/Desktop/BaiCuoiKyweb/DoAn/DoAn/DoAn/Views/Contact/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udGFjdFxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/THIEN/Desktop/BaiCuoiKyweb/DoAn/DoAn/DoAn/Views/Customer/Profile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcUHJvZmlsZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/THIEN/Desktop/BaiCuoiKyweb/DoAn/DoAn/DoAn/Views/Customer/SignIn.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcU2lnbkluLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/THIEN/Desktop/BaiCuoiKyweb/DoAn/DoAn/DoAn/Views/Customer/SignUp.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcU2lnblVwLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/THIEN/Desktop/BaiCuoiKyweb/DoAn/DoAn/DoAn/Views/Home/AccessDenied.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxBY2Nlc3NEZW5pZWQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/THIEN/Desktop/BaiCuoiKyweb/DoAn/DoAn/DoAn/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/THIEN/Desktop/BaiCuoiKyweb/DoAn/DoAn/DoAn/Views/Home/PageNotfound.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQYWdlTm90Zm91bmQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/THIEN/Desktop/BaiCuoiKyweb/DoAn/DoAn/DoAn/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/THIEN/Desktop/BaiCuoiKyweb/DoAn/DoAn/DoAn/Views/Product/Detail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxEZXRhaWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/THIEN/Desktop/BaiCuoiKyweb/DoAn/DoAn/DoAn/Views/Product/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/THIEN/Desktop/BaiCuoiKyweb/DoAn/DoAn/DoAn/Views/Shared/Components/BestSeller/BestSeller.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcQmVzdFNlbGxlclxCZXN0U2VsbGVyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/THIEN/Desktop/BaiCuoiKyweb/DoAn/DoAn/DoAn/Views/Shared/Components/Cart/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcQ2FydFxEZWZhdWx0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/THIEN/Desktop/BaiCuoiKyweb/DoAn/DoAn/DoAn/Views/Shared/Components/FeaturedProducts/FeatureProduct.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcRmVhdHVyZWRQcm9kdWN0c1xGZWF0dXJlUHJvZHVjdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/THIEN/Desktop/BaiCuoiKyweb/DoAn/DoAn/DoAn/Views/Shared/Components/Footer/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcRm9vdGVyXERlZmF1bHQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/THIEN/Desktop/BaiCuoiKyweb/DoAn/DoAn/DoAn/Views/Shared/Components/MenuCategory/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcTWVudUNhdGVnb3J5XERlZmF1bHQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/THIEN/Desktop/BaiCuoiKyweb/DoAn/DoAn/DoAn/Views/Shared/Components/MenuDynamic/MenuDynamic.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcTWVudUR5bmFtaWNcTWVudUR5bmFtaWMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/THIEN/Desktop/BaiCuoiKyweb/DoAn/DoAn/DoAn/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/THIEN/Desktop/BaiCuoiKyweb/DoAn/DoAn/DoAn/Views/Shared/_LayoutCustomer.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXRDdXN0b21lci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/THIEN/Desktop/BaiCuoiKyweb/DoAn/DoAn/DoAn/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/THIEN/Desktop/BaiCuoiKyweb/DoAn/DoAn/DoAn/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/THIEN/Desktop/BaiCuoiKyweb/DoAn/DoAn/DoAn/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/THIEN/Desktop/BaiCuoiKyweb/DoAn/DoAn/DoAn/Areas/Admin/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-giksswx5vo
+
+[C:/Users/THIEN/Desktop/BaiCuoiKyweb/DoAn/DoAn/DoAn/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-swq59q5s7t

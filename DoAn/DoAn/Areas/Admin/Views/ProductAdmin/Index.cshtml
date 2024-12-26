@@ -1,0 +1,140 @@
+﻿@model DoAn.Areas.Admin.Models.ProductAdminModel
+@using Syncfusion.EJ2
+@{
+    ViewData["Title"] = "Product List";
+}
+<div class="align-content-center">
+    <h1>Product List</h1>
+
+    <!-- Create New Product -->
+    <p>
+        <a asp-action="Create" class="btn btn-primary">Tạo sản phẩm mới</a>
+    </p>
+
+    <!-- Search Form -->
+    <form asp-action="Index" method="get">
+        <div class="form-actions no-color">
+            <p>
+                Find by name:
+                <input type="text" name="searchString" value="@ViewData["CurrentFilter"]" />
+                <input type="submit" value="Search" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-outline-dark">Back to Full List</a>
+            </p>
+        </div>
+    </form>
+
+    <!-- Product Table -->
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>
+                    <a asp-action="Index" asp-route-searchString="@ViewData["CurrentFilter"]" asp-route-sortOrder="@ViewData["IdSortParm"]">
+                        Id
+                        @if (ViewData["SortColumn"]?.ToString() == "")
+                        {
+                            <span>&darr;</span>
+                        }
+                        @if (ViewData["SortColumn"]?.ToString() == "id_desc")
+                        {
+                            <span>&uarr;</span>
+                        }
+                    </a>
+                </th>
+                <th>
+                    <a asp-action="Index" asp-route-searchString="@ViewData["CurrentFilter"]" asp-route-sortOrder="@ViewData["TitleSortParm"]">
+                        Title
+                        @if (ViewData["SortColumn"]?.ToString() == "title")
+                        {
+                            <span>&uarr;</span>
+                        }
+                        @if (ViewData["SortColumn"]?.ToString() == "title_desc")
+                        {
+                            <span>&darr;</span>
+                        }
+                    </a>
+                </th>
+                <th>Content</th>
+                <th>Image</th>
+                <th>
+                    <a asp-action="Index" asp-route-searchString="@ViewData["CurrentFilter"]" asp-route-sortOrder="@ViewData["PriceSortParm"]">
+                        Price
+                    </a>
+                </th>
+                <th>Rate</th>
+                <th>Create At</th>
+                <th>Update At</th>
+                <th>Category Id</th>
+                <th>Category Title</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.ProductAdmins)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Title</td>
+                    <td>
+                        <span style="line-height:1.5rem; height:4.5rem; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">
+                            @item.Content
+                        </span>
+                    </td>
+                    <td>
+                        <img src="~/images/sanpham/@item.Img" class="img-fluid" style="width:100px; height:60px; object-fit:contain" />
+                    </td>
+                    <td>@item.Price.ToString("#,##0 VND")</td>
+                    <td>@item.Rate</td>
+                    <td>@item.CreateAt.ToString("yyyy-MM-dd")</td>
+                    <td>@item.UpdateAt.ToString("yyyy-MM-dd")</td>
+                    <td>@item.CategoryId</td>
+                    <td>@item.CategoryTitle</td>
+                    <td>
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <li><a class="dropdown-item" asp-action="Edit" asp-route-id="@item.Id"><i class="fas fa-edit"></i> Edit</a></li>
+                                <li><a class="dropdown-item" asp-action="Details" asp-route-id="@item.Id"><i class="fas fa-info-circle"></i> Details</a></li>
+                                <li><a class="dropdown-item text-danger" asp-action="Delete" asp-route-id="@item.Id" onclick="return confirm('Bạn có chắc chắn muốn xóa?')"><i class="fas fa-trash"></i> Delete</a></li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <!-- Pagination -->
+    <div class="pagination d-flex justify-content-center mt-4">
+        @if (Model.CurrentPageIndex > 1)
+        {
+            <a asp-action="Index" asp-route-page="@(Model.CurrentPageIndex - 1)"
+               asp-route-searchString="@ViewData["CurrentFilter"]"
+               asp-route-sortOrder="@ViewData["SortColumn"]"
+               class="btn btn-outline-dark mx-2">
+                &laquo; Previous
+            </a>
+        }
+
+        @for (int i = 1; i <= Model.PageCount; i++)
+        {
+            <a asp-action="Index" asp-route-page="@i"
+               asp-route-searchString="@ViewData["CurrentFilter"]"
+               asp-route-sortOrder="@ViewData["SortColumn"]"
+               class="btn @(i == Model.CurrentPageIndex ? "btn-primary" : "btn-outline-dark") mx-1">
+                @i
+            </a>
+        }
+
+        @if (Model.PageCount > Model.CurrentPageIndex)
+        {
+            <a asp-action="Index" asp-route-page="@(Model.CurrentPageIndex + 1)"
+               asp-route-searchString="@ViewData["CurrentFilter"]"
+               asp-route-sortOrder="@ViewData["SortColumn"]"
+               class="btn btn-outline-dark mx-2">
+                Next &raquo;
+            </a>
+        }
+    </div>
+</div>

@@ -1,0 +1,112 @@
+﻿<h1>Dashboard</h1>
+
+
+@{
+    ViewData["Title"] = "Dashboard";
+}
+<head> <link rel="stylesheet" href="~/css/Admin.css" /></head>
+<h1>Dashboard</h1>
+<div class="container-fluid featurs py-5">
+    <div class="container py-5">
+        <div class="row g-4">
+            <!-- Tổng doanh thu tháng này -->
+            <div class="col-md-6 col-lg-3">
+                <div class="featurs-item text-center rounded p-4 featurs-item-1">
+                    <div class="featurs-icon btn-square rounded-circle bg-dollar mb-5 mx-auto">
+                        <i class="fas fa-dollar-sign fa-3x text-white"></i> <!-- Icon đô la Mỹ -->
+                    </div>
+                    <div class="featurs-content text-center">
+                        <h5>Tổng Doanh Thu</h5>
+                        <p class="mb-0">@ViewBag.MonthlyRevenue.ToString("N0")</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tổng số thanh toán -->
+            <div class="col-md-6 col-lg-3">
+                <div class="featurs-item text-center rounded p-4 featurs-item-2">
+                    <div class="featurs-icon btn-square rounded-circle bg-green-powder mb-5 mx-auto">
+                        <i class="fas fa-file-invoice fa-3x text-white"></i> <!-- Icon phiếu giao dịch -->
+                    </div>
+                    <div class="featurs-content text-center">
+                        <h5>Tổng Số Thanh Toán</h5>
+                        <p class="mb-0">@ViewBag.TotalPayments</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tổng số sản phẩm -->
+            <div class="col-md-6 col-lg-3">
+                <div class="featurs-item text-center rounded p-4 featurs-item-3">
+                    <div class="featurs-icon btn-square rounded-circle bg-blue-a2dce mb-5 mx-auto">
+                        <i class="fas fa-apple-alt fa-3x text-white"></i> <!-- Icon sản phẩm trái cây -->
+                    </div>
+                    <div class="featurs-content text-center">
+                        <h5>Tổng Số Sản Phẩm</h5>
+                        <p class="mb-0">@ViewBag.TotalProducts</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tổng số tài khoản -->
+            <div class="col-md-6 col-lg-3">
+                <div class="featurs-item text-center rounded p-4 featurs-item-4">
+                    <div class="featurs-icon btn-square rounded-circle bg-light-aDEE2 mb-5 mx-auto">
+                        <i class="fas fa-users fa-3x text-white"></i> <!-- Icon tài khoản -->
+                    </div>
+                    <div class="featurs-content text-center">
+                        <h5>Tổng Số Tài Khoản</h5>
+                        <p class="mb-0">@ViewBag.TotalCustomers</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<!-- Biểu đồ doanh thu theo tháng -->
+<h2>Biểu đồ doanh thu theo tháng</h2>
+
+<canvas id="revenueChart" width="400" height="200"></canvas>
+<br/>
+<script>
+    // Dữ liệu biểu đồ
+    var ctx = document.getElementById('revenueChart').getContext('2d');
+    var revenueChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'],
+            datasets: [{
+                label: 'Doanh thu theo tháng',
+                data: [
+    @ViewBag.RevenueMonth1,
+    @ViewBag.RevenueMonth2,
+    @ViewBag.RevenueMonth3,
+    @ViewBag.RevenueMonth4,
+    @ViewBag.RevenueMonth5,
+    @ViewBag.RevenueMonth6,
+    @ViewBag.RevenueMonth7,
+    @ViewBag.RevenueMonth8,
+    @ViewBag.RevenueMonth9,
+    @ViewBag.RevenueMonth10,
+    @ViewBag.RevenueMonth11,
+    @ViewBag.RevenueMonth12
+                    ],
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>

@@ -1,0 +1,69 @@
+﻿@model DoAn.Areas.Admin.Models.ProductFormAdmin
+@using Syncfusion.EJ2
+@{
+    ViewData["Title"] = "Create";
+}
+<h1>Create</h1>
+
+<h4>Add New Product </h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <!-- Title Field -->
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+
+            <!-- Content Field (Multiline Input) -->
+            <div class="form-group">
+                <label asp-for="Content" class="control-label">Content</label>
+                <textarea asp-for="Content" class="form-control" spellcheck="false" cols="30" rows="11" placeholder="Enter content here"></textarea>
+                <span asp-validation-for="Content" class="text-danger"></span>
+            </div>
+
+            <!-- Image Upload Field -->
+            <div class="form-group col-lg-8 control-section">
+                <label asp-for="Img" class="control-label"></label>
+                <input name="Img" id="Img" type="file" accept="image/gif, image/jpeg, image/png" class="form-control" />
+                <span asp-validation-for="Img" class="text-danger"></span>
+            </div>
+
+            <!-- Price Field -->
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" type="number" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+
+            <!-- Category Field -->
+            <div class="form-group">
+                <label class="control-label">Loại Hàng Hóa</label>
+                <select class="form-select" asp-items="@Model.ListCategory" asp-for="IdCategorySelected">
+                </select>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Back to List Link -->
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+

@@ -1,0 +1,144 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <TypeScriptRemoveComments>True</TypeScriptRemoveComments>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <TypeScriptRemoveComments>True</TypeScriptRemoveComments>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <BaseOutputPath>C:\Users\THIEN\Desktop\BaiCuoiKyweb\DoAn\DoAn\DoAn\bin\Debug\Debug\net8.0</BaseOutputPath>
+    <GenerateDocumentationFile>False</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.QuickGrid.EntityFrameworkAdapter" Version="8.0.11" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="8.0.11" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="6.0.0-preview3.24332.3" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.7" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="PayPal" Version="2.0.0-rc2" />
+    <PackageReference Include="RestSharp" Version="112.1.0" />
+    <PackageReference Include="Syncfusion.EJ2.AspNet.Core" Version="28.1.33" />
+    <PackageReference Include="VNPAY.NET" Version="8.5.0" />
+    <PackageReference Include="VNPayPackage" Version="2.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EditorConfigFiles Remove="C:\Users\THIEN\Desktop\BaiCuoiKyweb\DoAn\DoAn\.editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Areas\Admin\Views\CategoryAdmin\Create.cshtml" />
+    <None Include="Areas\Admin\Views\CategoryAdmin\Delete.cshtml" />
+    <None Include="Areas\Admin\Views\CategoryAdmin\Details.cshtml" />
+    <None Include="Areas\Admin\Views\CategoryAdmin\Edit.cshtml" />
+    <None Include="Areas\Admin\Views\CategoryAdmin\Index.cshtml" />
+    <None Include="Areas\Admin\Views\ProductAdmin\Delete.cshtml" />
+    <None Include="Areas\Admin\Views\ProductAdmin\Details.cshtml" />
+    <None Include="Areas\Admin\Views\ProductAdmin\Index.cshtml" />
+    <None Include="C:\Users\THIEN\Desktop\BaiCuoiKyweb\DoAn\DoAn\.editorconfig" />
+    <None Include="wwwroot\lib\easing\easing.js" />
+    <None Include="wwwroot\lib\easing\easing.min.js" />
+    <None Include="wwwroot\lib\lightbox\js\lightbox.min.js" />
+    <None Include="wwwroot\lib\owlcarousel\LICENSE" />
+    <None Include="wwwroot\lib\owlcarousel\owl.carousel.js" />
+    <None Include="wwwroot\lib\owlcarousel\owl.carousel.min.js" />
+    <None Include="wwwroot\lib\waypoints\links.php" />
+    <None Include="wwwroot\lib\waypoints\waypoints.min.js" />
+    <None Include="wwwroot\scss\bootstrap.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\bootstrap-grid.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\bootstrap-reboot.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\bootstrap-utilities.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\bootstrap.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\forms\_floating-labels.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\forms\_form-check.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\forms\_form-control.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\forms\_form-range.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\forms\_form-select.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\forms\_form-text.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\forms\_input-group.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\forms\_labels.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\forms\_validation.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\helpers\_clearfix.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\helpers\_colored-links.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\helpers\_position.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\helpers\_ratio.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\helpers\_stretched-link.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\helpers\_text-truncation.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\helpers\_visually-hidden.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\mixins\_alert.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\mixins\_border-radius.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\mixins\_box-shadow.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\mixins\_breakpoints.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\mixins\_buttons.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\mixins\_caret.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\mixins\_clearfix.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\mixins\_color-scheme.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\mixins\_container.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\mixins\_deprecate.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\mixins\_forms.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\mixins\_gradients.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\mixins\_grid.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\mixins\_image.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\mixins\_list-group.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\mixins\_lists.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\mixins\_pagination.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\mixins\_reset-text.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\mixins\_resize.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\mixins\_table-variants.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\mixins\_text-truncate.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\mixins\_transition.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\mixins\_utilities.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\mixins\_visually-hidden.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\utilities\_api.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\vendor\_rfs.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\_accordion.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\_alert.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\_badge.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\_breadcrumb.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\_button-group.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\_buttons.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\_card.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\_carousel.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\_close.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\_containers.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\_dropdown.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\_forms.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\_functions.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\_grid.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\_helpers.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\_images.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\_list-group.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\_mixins.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\_modal.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\_nav.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\_navbar.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\_offcanvas.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\_pagination.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\_popover.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\_progress.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\_reboot.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\_root.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\_spinners.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\_tables.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\_toasts.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\_tooltip.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\_transitions.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\_type.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\_utilities.scss" />
+    <None Include="wwwroot\scss\bootstrap\scss\_variables.scss" />
+	  <None Include="wwwroot\Images\SanPham" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="wwwroot\chart\" />
+  </ItemGroup>
+
+</Project>

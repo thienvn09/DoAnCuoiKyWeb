@@ -1,0 +1,38 @@
+﻿@model IEnumerable<DoAn.Models.Product>
+
+<div class="row g-4">
+    @foreach (var product in Model)
+    {
+        <div class="col-lg-6 col-xl-4">
+            <div class="p-4 rounded bg-light d-flex flex-column h-100 shadow-sm">
+                <div class="row align-items-center mb-3">
+                    <div class="col-6">
+                        <img src="~/Images/SanPham/@product.Img" class="img-fluid rounded w-100" alt="@product.Title" style="object-fit: cover; height: 200px;" />
+                    </div>
+                    <div class="col-6">
+                        <a href="#" class="h5 text-dark text-truncate" style="font-size: 1.2rem; font-weight: 600;">@product.Title</a>
+                        <div class="d-flex my-2">
+                            @for (int i = 0; i < 5; i++)
+                            {
+                                if (i < product.Rate)
+                                {
+                                    <i class="fas fa-star text-primary"></i>
+                                }
+                                else
+                                {
+                                    <i class="fas fa-star"></i>
+                                }
+                            }
+                        </div>
+                        <h4 class="mb-3 text-danger" style="font-size: 1.5rem;">@product.Price.ToString("#,##0 VND")</h4>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mt-auto">
+                    <a asp-controller="Cart" asp-action="AddToCart" asp-route-id="@product.Id" class="btn btn-primary rounded-pill px-4 py-2 w-100">
+                        <i class="fa fa-shopping-bag me-2"></i> Thêm vào giỏ
+                    </a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

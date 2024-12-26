@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - DoAn</title>
+    <link rel=" stylesheet" href="~/css/Responsive.css" />
+    <link rel="stylesheet" href="~/css/Mystyle.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/DoAn.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Back to Shop</a>
+        <div class="navbar-collapse collapse d-sm-inline-flex">
+            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Home" asp-action="Index">Index</a>
+            <a class="nav-link text-dark" asp-area="Admin" asp-controller="CategoryAdmin" asp-action="Index">Danh mục sản phẩm</a>
+            <a class="nav-link text-dark" asp-area="Admin" asp-controller="ProductAdmin" asp-action="Index">Danh sách sản phẩm</a>
+            <a class="nav-link text-dark" asp-area="Admin" asp-controller="CustomerAdmin" asp-action="Index">Danh sách khách hàng</a>
+            <div class="message" style="margin-left: auto; display: flex; align-items: center;">
+                <a>Xin chào admin</a>
+                <div class="dp">
+                    <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210180014/profile-removebg-preview.png" class="dpicn" alt="dp">
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2024 - DoAn - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

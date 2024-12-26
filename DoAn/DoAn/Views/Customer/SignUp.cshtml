@@ -1,0 +1,133 @@
+﻿@model DoAn.Models.Customer
+@{
+    ViewData["Title"] = "SignUp";
+}
+
+<!-- Form Start -->
+<div class="container-fluid py-5" style="margin-top:100px">
+    <div class="container py-5">
+        <h2 class="mb-4">Đăng ký tài khoản mới</h2>
+        <!-- Alert Error Start -->
+        @if (!string.IsNullOrWhiteSpace(TempData["SignUpErrorMessage"]?.ToString()))
+        {
+            <div class="w-100 d-flex justify-content-end">
+                <div class="alert alert-danger alert-dismissible fade show w-50 r-0" role="alert" id="alert_error">
+                    <strong>Error!</strong> @TempData["SignUpErrorMessage"]?.ToString()
+                    <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close">
+                    </button>
+                </div>
+            </div>
+        }
+        <!-- Alert Error End -->
+
+        <form method="post" asp-action="SignUp" enctype="multipart/form-data">
+            <div class="row g-5">
+                <div class="col-md-12 col-lg-6 col-xl-5">
+                    <!-- Avatar Start -->
+                    <!-- Avatar -->
+                    <div class="w-50 justify-content-md-center"
+                         style="position: relative; left: 50%; transform: translate(-50%)">
+                        <img src="~/img/avatar-default.jpg"
+                             class="img-fluid w-100"
+                             id="image_preview"
+                             style="
+                                        aspect-ratio: 1;
+                                        object-fit: cover;
+                                        border-radius: 100%;
+                                        box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.25);
+                                    " />
+                    </div>
+                    <!-- Avatar End -->
+                    <!-- Menu Profile Start -->
+                    <div class="d-flex mt-5 justify-content-center">
+                        <a class="btn btn-outline-primary" style="margin-right: 20px; position:relative">
+                            <label style="font-size: 16px">Chọn ảnh đại diện</label>
+                            <input type="file"
+                                   name="ImgUpload"
+                                   id="image_upload"
+                                   style="
+                                            position: absolute;
+                                            width: 100%;
+                                            height: 100%;
+                                            top: 0;
+                                            left: 0;
+                                            opacity: 0;
+                                        " />
+                        </a>
+                    </div>
+                    <!-- Menu Profile End -->
+                </div>
+
+                <div class="col-md-12 col-lg-6 col-xl-7">
+                    <div class="row">
+                        <div class="col-md-12 col-lg-6">
+                            <div class="form-item w-100">
+                                <label class="form-label my-3">Họ <span asp-validation-for="LastName" class="text-danger"></span></label>
+                                <input type="text" asp-for="LastName" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-lg-6">
+                            <div class="form-item w-100">
+                                <label class="form-label my-3">Tên <span asp-validation-for="FirstName" class="text-danger"></span></label>
+                                <input type="text" asp-for="FirstName" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-item">
+                        <label class="form-label my-3">Mật khẩu <span asp-validation-for="Password" class="text-danger"></span></label>
+                        <input type="text" asp-for="Password" class="form-control" />
+                    </div>
+                    <div class="form-item">
+                        <label class="form-label my-3">Số điện thoại <span asp-validation-for="Phone" class="text-danger"></span></label>
+                        <input type="text" asp-for="Phone" class="form-control" />
+                    </div>
+                    <div class="form-item">
+                        <label class="form-label my-3">Email <span asp-validation-for="Email" class="text-danger"></span></label>
+                        <input type="email" asp-for="Email" class="form-control" placeholder="" />
+                    </div>
+                    <div class="form-item">
+                        <label class="form-label my-3">Ngày sinh <span asp-validation-for="DateOfBirth" class="text-danger"></span></label>
+                        <input type="date" asp-for="DateOfBirth" formnovalidate="formnovalidate" class="form-control w-50" />
+                    </div>
+                    <div class="form-item">
+                        <label class="form-label my-3">Địa chỉ <sup></sup></label>
+                        <input type="text" asp-for="Address" class="form-control" />
+                    </div>
+
+                    <div class="form-item my-3">
+                        <button type="submit" class="btn btn-primary">
+                            <span class="mx-3" style="color: white"> Đăng ký </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- Form Page End -->
+<!-- Display Image Upload Start -->
+<script>
+    // --------- Image Upload  ---------------
+    const imageUpload = document.getElementById("image_upload");
+    const imagePreview = document.getElementById("image_preview");
+
+    imageUpload.addEventListener("change", (event) => {
+        const files = event.target.files;
+        const [file] = event.target.files;
+        console.log("files", file);
+
+        imagePreview.src = URL.createObjectURL(event.target.files[0]);
+        imagePreview.onload = function () {
+            URL.revokeObjectURL(output.src); // free memory
+        };
+    });
+    // ------------- Auto Close Alert ----------------
+    const alert_error = document.getElementById("alert_error")
+    window.setTimeout(function () {
+        $(".alert").fadeTo(500, 0).slideUp(500, function () {
+            $(this).remove();
+        });
+    }, 2000);
+</script>
+<!-- Display Image Upload End -->
