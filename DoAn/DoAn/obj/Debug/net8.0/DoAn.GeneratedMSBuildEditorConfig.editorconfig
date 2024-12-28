@@ -112,8 +112,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/THIEN/Desktop/BaiCuoiKyweb/DoAn/DoAn/DoAn/Views/CallBack/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FsbEJhY2tcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/THIEN/Desktop/BaiCuoiKyweb/DoAn/DoAn/DoAn/Views/Cart/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FydFxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/THIEN/Desktop/BaiCuoiKyweb/DoAn/DoAn/DoAn/Views/Cart/PaymentView.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FydFxQYXltZW50Vmlldy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/THIEN/Desktop/BaiCuoiKyweb/DoAn/DoAn/DoAn/Views/Contact/Index.cshtml]
@@ -148,8 +156,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/THIEN/Desktop/BaiCuoiKyweb/DoAn/DoAn/DoAn/Views/Payment/CreatePaymentUrlVnpay.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF5bWVudFxDcmVhdGVQYXltZW50VXJsVm5wYXkuY3NodG1s
+[C:/Users/THIEN/Desktop/BaiCuoiKyweb/DoAn/DoAn/DoAn/Views/Payment/PaymentView.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF5bWVudFxQYXltZW50Vmlldy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/THIEN/Desktop/BaiCuoiKyweb/DoAn/DoAn/DoAn/Views/Product/Detail.cshtml]

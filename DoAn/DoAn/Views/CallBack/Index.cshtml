@@ -1,0 +1,38 @@
+﻿@model List<DoAn.Models.Momo.Momoinfo>
+
+@{
+    ViewData["Title"] = "Danh sách giao dịch Momo";
+}
+
+<h1>Danh sách giao dịch Momo</h1>
+
+@if (Model != null && Model.Count > 0)
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Mã giao dịch</th>
+                <th>Thông tin đơn hàng</th>
+                <th>Số tiền</th>
+                <th>Ngày giao dịch</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.OrderId</td>
+                    <td>@item.OrderInfo</td>
+                    <td>@string.Format("{0:N0} VND", item.Amount)</td>
+                    <td>@item.datetime.ToString("dd/MM/yyyy HH:mm:ss")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Không có giao dịch nào được tìm thấy.</p>
+}

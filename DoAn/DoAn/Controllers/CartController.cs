@@ -16,181 +16,196 @@ namespace DoAn.Controllers
 {
     public class CartController : Controller
     {
-        private readonly ProductDAL _productDAL;
-        private readonly CustomerDAL _customerDAL;
-        private readonly CartDAL _cartDAL;
+        private readonly ProductDAL _productDAL = new ProductDAL();
+        private readonly CustomerDAL _customerDAL = new CustomerDAL();
+        private readonly CartDAL _cartDAL = new CartDAL();
         private readonly IMomoService _momoService;
-        private readonly IVnPayService _vnPayService;
-
-        public CartController(IMomoService momoService, IVnPayService vnPayService)
+        private readonly MomoPaymentDAL _momoPaymentDAL;
+        public CartController(IMomoService momoService)
         {
-            _productDAL = new ProductDAL();
-            _customerDAL = new CustomerDAL();
-            _cartDAL = new CartDAL();
             _momoService = momoService;
-            _vnPayService = vnPayService;
         }
 
         public List<CartItem> Cart => HttpContext.Session.Get<List<CartItem>>(MyConst.CART_KEY) ?? new List<CartItem>();
 
         public IActionResult Index()
         {
-            var payment = new PaymentInformationModel
-            {
-                Name = "Guest",
-                Amount = Cart.Sum(p => p.Total) * 100,
-                OrderType = "Giỏ hàng",
-                OrderDescription = "Thanh toán qua giỏ hàng"
-            };
-            ViewData["PaymentResponseModel"] = payment;
             return View(Cart);
+        }
+
+        // Lấy tổng tiền thanh toán
+        public IActionResult GetTotalAmount()
+        {
+            int totalAmount = Cart.Sum(item => item.Total);
+            return Json(totalAmount);
         }
 
         public IActionResult AddToCart(int id, int quantity = 1)
         {
-            var cart = Cart;
-            var item = cart.SingleOrDefault(p => p.IdProduct == id);
+            var gioHang = Cart;
+            var item = gioHang.SingleOrDefault(p => p.IdProduct == id);
             if (item == null)
             {
-                var product = _productDAL.GetProductById(id);
-                if (product == null)
+                Product productById = _productDAL.GetProductById(id);
+                if (productById == null)
                 {
                     TempData["Message"] = "Không tìm thấy sản phẩm";
-                    return RedirectToAction("Index");
+                    return Redirect("/404");
                 }
-
                 item = new CartItem
                 {
-                    IdProduct = product.Id,
-                    Img = product.Img,
-                    Name = product.Title,
-                    Price = product.Price,
-                    Rate = product.Rate,
+                    IdProduct = productById.Id,
+                    Img = productById.Img,
+                    Name = productById.Title,
+                    Price = productById.Price,
+                    Rate = productById.Rate,
                     Quantity = quantity
                 };
-                cart.Add(item);
+                gioHang.Add(item);
             }
             else
             {
                 item.Quantity += quantity;
             }
-
-            HttpContext.Session.Set(MyConst.CART_KEY, cart);
+            HttpContext.Session.Set(MyConst.CART_KEY, gioHang);
             return RedirectToAction("Index");
         }
 
         public IActionResult ChangeQuantityCart(int id, bool isIncrement = true, int quantity = 1)
         {
-            var cart = Cart;
-            var item = cart.SingleOrDefault(p => p.IdProduct == id);
-
+            var gioHang = Cart;
+            var item = gioHang.SingleOrDefault(p => p.IdProduct == id);
             if (item == null)
             {
-                return Json(new { success = false, message = "Không tìm thấy sản phẩm" });
-            }
-
-            if (isIncrement)
-            {
-                item.Quantity += quantity;
+                TempData["Message"] = "Không tìm thấy sản phẩm";
+                return Redirect("/404");
             }
             else
             {
-                item.Quantity -= quantity;
-                if (item.Quantity <= 0)
+                if (isIncrement)
                 {
-                    cart.Remove(item);
+                    item.Quantity += quantity;
+                }
+                else
+                {
+                    item.Quantity -= quantity;
+                    if (item.Quantity <= 0)
+                    {
+                        gioHang.Remove(item);
+                    }
                 }
             }
-
-            HttpContext.Session.Set(MyConst.CART_KEY, cart);
-
-            return Json(new
-            {
-                success = true,
-                newQuantity = item.Quantity,
-                newTotal = item.Total.ToString("#,##0 VND"),
-                cartTotal = cart.Sum(p => p.Total).ToString("#,##0 VND")
-            });
+            HttpContext.Session.Set(MyConst.CART_KEY, gioHang);
+            return RedirectToAction("Index");
         }
 
         public IActionResult RemoveCart(int id)
         {
             var cart = Cart;
             var item = cart.SingleOrDefault(p => p.IdProduct == id);
+
             if (item != null)
             {
                 cart.Remove(item);
                 HttpContext.Session.Set(MyConst.CART_KEY, cart);
             }
+
             return RedirectToAction("Index");
         }
 
         [Authorize]
-        public async Task<IActionResult> CheckOut(string paymentMethod, string orderName, string orderDescription, string amount)
+        public async Task<IActionResult> CheckOut(string paymentMethod, string orderName, string orderDescription)
         {
             try
             {
-                if (Cart.Count == 0)
+                // Kiểm tra giỏ hàng có sản phẩm hay không
+                if (!Cart.Any())
                 {
-                    TempData["CheckOutErrorMessage"] = "Không có sản phẩm trong giỏ hàng.";
+                    TempData["CheckOutErrorMessage"] = "Giỏ hàng trống.";
                     return RedirectToAction("Index");
                 }
 
-                string? customerIdStr = HttpContext.User.FindFirstValue("CustomerId");
+                // Lấy thông tin người dùng từ session
+                string customerIdStr = HttpContext.User.FindFirstValue("CustomerId");
                 if (string.IsNullOrEmpty(customerIdStr))
                 {
-                    TempData["CheckOutErrorMessage"] = "Vui lòng đăng nhập để thanh toán.";
+                    TempData["CheckOutErrorMessage"] = "Bạn cần đăng nhập để thanh toán.";
                     return Redirect("/Customer/SignIn");
                 }
-                int customerId = Convert.ToInt32(customerIdStr);
 
-                Customer? customer = _customerDAL.GetCustomerById(customerId);
+                int customerId = int.Parse(customerIdStr);
+                var customer = _customerDAL.GetCustomerById(customerId);
+
                 if (customer == null)
                 {
                     TempData["CheckOutErrorMessage"] = "Không tìm thấy thông tin khách hàng.";
-                    return Redirect("/404");
+                    return RedirectToAction("Index");
                 }
 
+                // Tạo thông tin đơn hàng
                 var orderInfo = new OrderInfoModel
                 {
-                    FullName = orderName,
-                    Amount = Cart.Sum(p => p.Total).ToString(),
+                    FullName = orderName ?? $"{customer.FirstName} {customer.LastName}", // Nếu orderName null thì lấy tên khách hàng
+                    Amount = Cart.Sum(p => p.Total).ToString("#,##0"), // Tính tổng tiền trong giỏ hàng
                     OrderInfo = orderDescription
                 };
 
-                if (paymentMethod == "momo")
+                // Xử lý theo phương thức thanh toán
+                switch (paymentMethod.ToLower())
                 {
-                    var response = await _momoService.CreatePaymentAsync(orderInfo);
-                    if (!string.IsNullOrEmpty(response.PayUrl))
-                    {
-                        return Redirect(response.PayUrl);
-                    }
-                    TempData["CheckOutErrorMessage"] = "Không thể tạo liên kết thanh toán qua MoMo.";
-                }
-                else if (paymentMethod == "vnpay")
-                {
-                    var paymentUrl = _vnPayService.CreatePaymentUrl(new PaymentInformationModel
-                    {
-                        Name = customer.FirstName,
-                        Amount = double.Parse(orderInfo.Amount),
-                        OrderDescription = orderDescription,
-                        OrderType = "Giỏ hàng"
-                    }, HttpContext);
+                    case "momo":
+                        var momoResponse = await _momoService.CreatePaymentAsync(orderInfo);
+                        if (!string.IsNullOrEmpty(momoResponse.PayUrl))
+                        {
+                            // Lưu thông tin thanh toán MoMo vào cơ sở dữ liệu
+                            var momoPayment = new MomoPayment
+                            {
+                                CustomerId = customer.Id,
+                                FirstName = customer.FirstName,
+                                LastName = customer.LastName,
+                                Phone = customer.Phone,
+                                Email = customer.Email,
+                                CreateAt = DateTime.Now,
+                                Total = (float?).orderInfo.Amount, // Chuyển thành decimal
+                                MomoTransactionId = momoResponse.TransactionId,
+                                PayUrl = momoResponse.PayUrl,
+                                PaymentStatus = "Pending",
+                                PaymentDate = DateTime.Now,
+                                OrderInfo = orderDescription
+                            };
 
-                    return Redirect(paymentUrl);
-                }
-                else if (paymentMethod == "cod")
-                {
-                    bool isSuccess = _cartDAL.CheckOut(customer, Cart);
-                    if (isSuccess)
-                    {
-                        HttpContext.Session.Remove(MyConst.CART_KEY);
-                        TempData["CheckOutSuccessMessage"] = "Đặt hàng thành công.";
-                        return RedirectToAction("Index");
-                    }
-                    TempData["CheckOutErrorMessage"] = "Đặt hàng thất bại.";
+                            var success = await _momoPaymentDAL.AddMomoPaymentAsync(momoPayment);
+
+                            // Nếu tạo link thanh toán thành công, chuyển hướng người dùng
+                            if (success)
+                            {
+                                HttpContext.Session.Remove(MyConst.CART_KEY); // Xóa giỏ hàng sau khi thanh toán
+                                return Redirect(momoResponse.PayUrl); // Chuyển hướng tới URL thanh toán MoMo
+                            }
+                        }
+
+                        TempData["CheckOutErrorMessage"] = "Không thể tạo liên kết thanh toán qua MoMo.";
+                        break;
+
+                    case "cod":
+                        // Thanh toán khi nhận hàng (COD)
+                        var isOrderSuccessful = _cartDAL.CheckOut(customer, Cart);
+                        if (isOrderSuccessful)
+                        {
+                            HttpContext.Session.Remove(MyConst.CART_KEY); // Xóa giỏ hàng
+                            TempData["CheckOutSuccessMessage"] = "Đặt hàng thành công.";
+                            return RedirectToAction("Index");
+                        }
+
+                        TempData["CheckOutErrorMessage"] = "Đặt hàng thất bại.";
+                        break;
+
+                    default:
+                        TempData["CheckOutErrorMessage"] = "Phương thức thanh toán không hợp lệ.";
+                        break;
                 }
 
+                // Nếu có lỗi, quay lại trang giỏ hàng
                 return RedirectToAction("Index");
             }
             catch (Exception ex)
@@ -201,28 +216,46 @@ namespace DoAn.Controllers
         }
 
 
-        [HttpGet]
-        public IActionResult PaymentCallbackVnpay()
+
+        // Refresh Cart View Component
+        public IActionResult RefreshCartViewComponent()
         {
-            var response = _vnPayService.PaymentExecute(Request.Query);
-            return Json(response);
+            return ViewComponent("Cart");
         }
 
-        private string HmacSha512(string key, string inputData)
+        // Lấy tổng tiền theo từng Product
+        public IActionResult GetTotalProduct(int idProduct)
         {
-            using var hmac = new HMACSHA512(Encoding.UTF8.GetBytes(key));
-            return string.Concat(hmac.ComputeHash(Encoding.UTF8.GetBytes(inputData)).Select(b => b.ToString("x2")));
+            var productFind = Cart.Find(item => item.IdProduct == idProduct);
+
+            int totalAmount = 0;
+            if (productFind != null)
+            {
+                totalAmount = productFind.Total;
+            }
+            return Json(totalAmount);
         }
 
-        public bool ValidateSignature(string inputHash, string secretKey)
+        // Phương thức callback từ MoMo để xác nhận thanh toán
+        [HttpPost]
+        public IActionResult MoMoCallback(string transactionId, string status)
         {
-            var queryData = Request.Query.Keys
-                .Where(k => k != "vnp_SecureHash" && k != "vnp_SecureHashType")
-                .OrderBy(k => k)
-                .Select(k => WebUtility.UrlEncode(k) + "=" + WebUtility.UrlEncode(Request.Query[k]));
+            // Xử lý callback từ MoMo, cập nhật trạng thái thanh toán
+            if (status == "success")
+            {
+                var success = _cartDAL.UpdatePaymentStatus(transactionId, "Completed");
+                if (success)
+                {
+                    TempData["CheckOutSuccessMessage"] = "Thanh toán thành công!";
+                }
+            }
+            else
+            {
+                _cartDAL.UpdatePaymentStatus(transactionId, "Failed");
+                TempData["CheckOutErrorMessage"] = "Thanh toán thất bại!";
+            }
 
-            var signData = string.Join("&", queryData);
-            return string.Equals(inputHash, HmacSha512(secretKey, signData), StringComparison.InvariantCultureIgnoreCase);
+            return RedirectToAction("Index");
         }
     }
 }

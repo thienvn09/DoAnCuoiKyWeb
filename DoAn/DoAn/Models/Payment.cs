@@ -12,7 +12,7 @@
         public float Total { get; set; }
 
         // Foreign Key to PaymentMethod
-        public int PaymentMethodId { get; set; }
-        public PaymentMethod PaymentMethod { get; set; }
+        public string PaymentMethodId { get; set; }
+        public PaymentMethod PaymentMethod { get; set; }  // Liên kết với PaymentMethod
     }
 }

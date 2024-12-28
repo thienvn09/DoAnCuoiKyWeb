@@ -1,0 +1,35 @@
+﻿@model List<DoAn.Models.PaymentInfo>
+
+@{
+    ViewData["Title"] = "Danh sách giao dịch thanh toán";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Mã đơn hàng</th>
+            <th>Thông tin đơn hàng</th>
+            <th>Số tiền</th>
+            <th>Mã giao dịch</th>
+            <th>Thời gian</th>
+            <th>Trạng thái</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var payment in Model)
+        {
+            <tr>
+                <td>@payment.Id</td>
+                <td>@payment.OrderId</td>
+                <td>@payment.OrderInfo</td>
+                <td>@string.Format("{0:N0} VND", payment.Amount)</td>
+                <td>@payment.TransId</td>
+                <td>@payment.ResponseTime.ToString("dd/MM/yyyy HH:mm:ss")</td>
+                <td>@(payment.ResultCode == 0 ? "Thành công" : "Thất bại")</td>
+            </tr>
+        }
+    </tbody>
+</table>
